@@ -3,9 +3,9 @@ const client = new Discord.Client()
 
 const goodIds = ['846424493606174740']
 const args = process.argv.slice(2)
-const type = args[2]
-const title = args[3]
-const message = args[4]
+const type = args[0]
+const title = args[1]
+const message = args[2]
 function getEmbed() {
 	const embed = new Discord.MessageEmbed()
 		.setTitle(title)
@@ -19,12 +19,15 @@ function getEmbed() {
 	return embed
 }
 
-client.login(process.env.DISCORD_TOKEN).then(function (result) {
+async function run() {
+	await client.login(process.env.DISCORD_TOKEN)
 	const channels = client.channels.cache.array()
 	for (const channel of channels) {
 		if (goodIds.includes(channel.id)) {
-			channel.send(getEmbed())
+			await channel.send(getEmbed())
 		}
 	}
 	process.exit(0)
-})
+}
+
+run()
