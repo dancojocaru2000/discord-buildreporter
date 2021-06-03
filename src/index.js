@@ -15,6 +15,9 @@ function getEmbed() {
 	if (type == 'error') {
 		embed.setColor(0xff0000)
 	}
+	else if (type == 'success') {
+		embed.setColor(0x00ff00)
+	}
 	
 	return embed
 }
